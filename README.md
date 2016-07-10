@@ -4,6 +4,11 @@
 web and helping others to find the Truth online. In this repo we are building client 
 for WorldBrain [Search](https://github.com/WorldBrain/search-engine).
 
+In its first version it is a simple google-like landingpage, a results page and a page where we list all the already indexed outlets. 
+Mockups you find [here](https://github.com/WorldBrain/Webmarks/issues/9#issuecomment-231402452).
+
+### Technical Implementation:
+
 First version of the client is based in the [React Starter](https://github.com/kriasoft/react-starter-kit/tree/feature/redux) project. 
 Use use it as starting point for client development and later will come up with our own way of building front-end app.
    
