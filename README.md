@@ -5,10 +5,6 @@ Mockups you find [here](https://github.com/WorldBrain/Webmarks/issues/9#issuecom
 
 #### Technical Implementation:
 
-#### Input:
-
-#### Output:
-
 #### Current State/To-Dos:
 
 #### How to Install:
