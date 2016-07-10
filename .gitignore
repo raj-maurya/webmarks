@@ -35,3 +35,41 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+#IDEA gitignore
+
+*.xml
+
+!/codeStyleSettings.xml
+!/copyright/*.xml
+!/fileColors.xml
+!/encodings.xml
+!/gradle.xml
+!/runConfigurations/*.xml
+
+!/inspectionProfiles/*.xml
+/inspectionProfiles/profiles_settings.xml
+
+!/scopes/*.xml
+/scopes/scope_settings.xml
+
+!/templateLanguages.xml
+!/vcs.xml
+
+# Ignore this in Clock Harness projects because it is created by the build system.
+/Config/vhost.conf
+
+# Vim
+.*.sw[a-z]
+*.un~i
+tags
+
+# OsX
+.DS_Store
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# ZSH Cake plugin cache
+/.cake_task_cache
