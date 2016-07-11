@@ -8,7 +8,6 @@
  */
 
 import path from 'path';
-import gaze from 'gaze';
 import Promise from 'bluebird';
 import fs from './lib/fs';
 import pkg from '../package.json';
@@ -20,8 +19,7 @@ async function copy({ watch } = {}) {
   const ncp = Promise.promisify(require('ncp'));
 
   await Promise.all([
-    ncp('src/public', 'build/public'),
-    ncp('src/content', 'build/content'),
+    ncp('src/public', 'build/public')
   ]);
 
   await fs.writeFile('./build/package.json', JSON.stringify({
@@ -32,20 +30,6 @@ async function copy({ watch } = {}) {
       start: 'node server.js',
     },
   }, null, 2));
-
-  if (watch) {
-    const watcher = await new Promise((resolve, reject) => {
-      gaze('src/content/**/*.*', (err, val) => err ? reject(err) : resolve(val));
-    });
-
-    const cp = async (file) => {
-      const relPath = file.substr(path.join(__dirname, '../src/content/').length);
-      await ncp(`src/content/${relPath}`, `build/content/${relPath}`);
-    };
-
-    watcher.on('changed', cp);
-    watcher.on('added', cp);
-  }
 }
 
 export default copy;

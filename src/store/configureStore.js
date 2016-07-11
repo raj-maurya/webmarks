@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from '../reducers';
+import rootReducer from '../redux/reducers';
 import createHelpers from './createHelpers';
 
 export default function configureStore(initialState, helpersConfig) {
@@ -43,8 +43,8 @@ export default function configureStore(initialState, helpersConfig) {
 
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (__DEV__ && module.hot) {
-    module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers').default) // eslint-disable-line global-require
+    module.hot.accept('../redux/reducers', () =>
+      store.replaceReducer(require('../redux/reducers').default) // eslint-disable-line global-require
     );
   }
 
