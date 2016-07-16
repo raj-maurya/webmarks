@@ -76,7 +76,7 @@ const config = {
       {
         test: /\.css/,
         loaders: [
-          'isomorphic-style-loader',
+          'style-loader',
           `css-loader?${JSON.stringify({
             sourceMap: DEBUG,
             // CSS Modules https://github.com/css-modules/css-modules
@@ -91,9 +91,8 @@ const config = {
       {
         test: /\.scss$/,
         loaders: [
-          'isomorphic-style-loader',
+          'style-loader',
           `css-loader?${JSON.stringify({ sourceMap: DEBUG, minimize: !DEBUG })}`,
-          'postcss-loader?pack=sass',
           'sass-loader',
         ],
       },

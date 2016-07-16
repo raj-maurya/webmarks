@@ -81,7 +81,6 @@ app.use((req, res, next) => {
       function getReduxPromise() {
         let { query, params } = renderProps;
         let component = renderProps.components[renderProps.components.length - 1].WrappedComponent;
-        console.error('component', component);
         let promise = (component && component.fetchData)
           ? component.fetchData({query, params, history, store})
           : Promise.resolve();

@@ -8,28 +8,25 @@
  */
 
 import React from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Header.css';
-import Link from '../Link';
-import Navigation from '../Navigation';
 import logoUrl from './logo-small.png';
 
 function Header() {
   return (
-    <div className={s.root}>
-      <div className={s.container}>
-        <Navigation className={s.nav} />
-        <Link className={s.brand} to="/">
-          <img src={logoUrl} width="38" height="38" alt="React" />
-          <span className={s.brandTxt}>Worldbrain</span>
-        </Link>
-        <div className={s.banner}>
-          <h1 className={s.bannerTitle}>Webmarks</h1>
-          <p className={s.bannerDesc}>Verifying the Internet with Science</p>
+    <div className="header">
+      <div className="header__logo">
+        <img className="header__logo-img" src={logoUrl} width="38" height="38" alt="Worldbrain"/>
+        <span className="header__logo-txt">Worldbrain</span>
+      </div>
+      <div>
+        <div class="header-right">
+          Right
+        </div>
+        <div class="header-left">
+          Left
         </div>
       </div>
     </div>
   );
 }
 
-export default withStyles(s)(Header);
+export default Header;

@@ -1,20 +1,20 @@
 import React from 'react';
-import Header from '../Header';
-import s from 'main-screen.css';
+import Header from '../../components/Header';
+import s from '../../assets/scss/app.scss';
 
-export default class MainScreen extends React.Component {
+class MainScreen extends React.Component {
   static propTypes = {
     children: React.PropTypes.element
   };
 
-  render () {
+  render() {
     return (
       <div className="main-screen">
-        <section>
-          <Header/>
-          { this.props.children }
-        </section>
+        <Header/>
+        { this.props.children }
       </div>
     );
   }
 }
+
+export default MainScreen;

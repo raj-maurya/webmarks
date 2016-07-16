@@ -10,8 +10,6 @@
 import 'babel-polyfill';
 import ReactDOM from 'react-dom';
 import FastClick from 'fastclick';
-import RootComponent from './containers/Root';
-import history from './core/history';
 import configureStore from './store/configureStore';
 import { addEventListener, removeEventListener } from './core/DOMUtils';
 import { Provider } from 'react-redux'
@@ -62,14 +60,15 @@ function render(container, state, component) {
 function run() {
   let currentLocation = null;
   const container = document.getElementById('app');
+  // Make taps on links and buttons work fast on mobiles
+  FastClick.attach(document.body);
+
   const initialState = JSON.parse(
     document.
       getElementById('source').
       getAttribute('data-initial-state')
   );
 
-  // Make taps on links and buttons work fast on mobiles
-  FastClick.attach(document.body);
 
   render(container, <Provider store={store}>
     <Router history={history} routes={routes}/>
