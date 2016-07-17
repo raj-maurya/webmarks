@@ -18,10 +18,10 @@ function Header() {
         <span className="header__logo-txt">Worldbrain</span>
       </div>
       <div>
-        <div class="header-right">
-          Right
+        <div className="header-right">
+          Right side
         </div>
-        <div class="header-left">
+        <div className="header-left">
           Left
         </div>
       </div>

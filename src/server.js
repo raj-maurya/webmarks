@@ -24,6 +24,7 @@ import { Provider } from 'react-redux'
 import { createMemoryHistory, match, RouterContext } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import PrettyError from 'pretty-error';
+import assets from './assets'; // eslint-disable-line import/no-unresolved
 
 const app = express();
 
@@ -50,10 +51,6 @@ app.use((req, res, next) => {
   const memoryHistory = createMemoryHistory(req.url);
   const store = configureStore(memoryHistory);
   const history = syncHistoryWithStore(memoryHistory, store);
-  store.dispatch(setRuntimeVariable({
-    name: 'initialNow',
-    value: Date.now()
-  }));
 
   // Send the rendered page back to the client
   match({history, routes, location: req.url}, (error, redirectLocation, renderProps) => {
@@ -71,7 +68,9 @@ app.use((req, res, next) => {
             <Provider store={store}>
               <RouterContext {...renderProps}/>
             </Provider>
-          )
+          ),
+          entry: assets.main.js,
+          children: ''
         }));
       }).catch((error) => {
         console.error('Error', error);

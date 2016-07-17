@@ -8,7 +8,10 @@
  */
 
 import 'babel-polyfill';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import routes from './routes';
+
 import FastClick from 'fastclick';
 import configureStore from './store/configureStore';
 import { addEventListener, removeEventListener } from './core/DOMUtils';
@@ -18,6 +21,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 
 const store = configureStore(browserHistory, window.__initialState__);
 const history = syncHistoryWithStore(browserHistory, store);
+require('./assets/scss/app.scss');
 
 // Restore the scroll position if it was saved into the state
 function restoreScrollPosition(state) {
@@ -69,8 +73,9 @@ function run() {
       getAttribute('data-initial-state')
   );
 
+  console.log('Error, AAA');
 
-  render(container, <Provider store={store}>
+  render(container,{}, <Provider store={store}>
     <Router history={history} routes={routes}/>
   </Provider>);
 

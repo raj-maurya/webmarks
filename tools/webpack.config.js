@@ -137,7 +137,6 @@ const config = {
 
   stats: {
     colors: true,
-    reasons: DEBUG,
     hash: VERBOSE,
     version: VERBOSE,
     timings: true,
@@ -145,6 +144,9 @@ const config = {
     chunkModules: VERBOSE,
     cached: VERBOSE,
     cachedAssets: VERBOSE,
+    modules: true,
+    reasons: true,
+    errorDetails: true
   },
 
   postcss(bundler) {
@@ -152,7 +154,7 @@ const config = {
       default: [
         // Transfer @import rule by inlining content, e.g. @import 'normalize.css'
         // https://github.com/postcss/postcss-import
-        require('postcss-import')({ addDependencyTo: bundler }),
+        require('postcss-import')({addDependencyTo: bundler}),
         // W3C variables, e.g. :root { --color: red; } div { background: var(--color); }
         // https://github.com/postcss/postcss-custom-properties
         require('postcss-custom-properties')(),
@@ -188,10 +190,10 @@ const config = {
         require('postcss-selector-not')(),
         // Add vendor prefixes to CSS rules using values from caniuse.com
         // https://github.com/postcss/autoprefixer
-        require('autoprefixer')({ browsers: AUTOPREFIXER_BROWSERS }),
+        require('autoprefixer')({browsers: AUTOPREFIXER_BROWSERS}),
       ],
       sass: [
-        require('autoprefixer')({ browsers: AUTOPREFIXER_BROWSERS }),
+        require('autoprefixer')({browsers: AUTOPREFIXER_BROWSERS}),
       ],
     };
   },
