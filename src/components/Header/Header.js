@@ -12,18 +12,16 @@ import logoUrl from './logo-small.png';
 
 function Header() {
   return (
-    <div className="header">
-      <div className="header__logo">
-        <img className="header__logo-img" src={logoUrl} width="38" height="38" alt="Worldbrain"/>
-        <span className="header__logo-txt">Worldbrain</span>
-      </div>
-      <div>
-        <div className="header-right">
-          Right side
-        </div>
-        <div className="header-left">
-          Left
-        </div>
+    <div className="top-bar">
+      <div className="top-bar-left">
+        <ul className="dropdown menu" data-dropdown-menu>
+          <li className="menu-text">Worldbrain</li>
+          <li>
+            <a href="#">About us</a>
+          </li>
+          <li><a href="#">Concat</a></li>
+          <li><a href="#">F.A.Q</a></li>
+        </ul>
       </div>
     </div>
   );

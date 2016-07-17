@@ -1,0 +1,28 @@
+import React, { Component, PropTypes } from 'react';
+import s from './Root.css';
+import { Provider } from 'react-redux';
+import routes from '../../routes';
+
+class Root extends Component {
+
+  static propTypes = {
+    store: PropTypes.object.isRequired,
+    error: PropTypes.object
+  };
+
+  render() {
+    if (this.props.error) {
+      return this.props.children;
+    }
+
+    const store = this.props.context.store;
+    return (
+      <Provider store={store}>
+        {routes}
+      </Provider>
+    );
+  }
+
+}
+
+export default Root;

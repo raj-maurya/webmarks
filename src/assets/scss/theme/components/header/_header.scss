@@ -1,0 +1,18 @@
+.top-bar {
+  @include top-bar-container;
+  z-index: 1;
+
+  &__logo {
+    @include top-bar-stacked;
+  }
+
+  .header-right {
+    @include top-bar-stacked;
+
+  }
+
+  .header-left {
+    @include top-bar-stacked;
+
+  }
+}

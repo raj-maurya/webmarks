@@ -1,4 +1,12 @@
 @import "foundation/all";
 
-@import "colors";
-@import "fonts";
+@import "./colors";
+@import "./fonts";
+@import "components/all";
+
+body {
+  font-size: 16px;
+  font-family: "Open Sans", Helvetica Neue, Helvetica, Arial;
+  font-style: normal;
+  font-weight: 400;
+}
