@@ -1,34 +1,15 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
+import React from 'react'
+import { render } from 'react-dom'
+import { Router, Route, hashHistory } from 'react-router'
+import MainContainer from '../containers/main'
+import HomeSection from '../containers/main/home'
+import SearchResultsSection from '../containers/main/search-results'
+import ContentSourcesSection from '../containers/main/content-sources'
 
-import React from 'react';
-import App from '../components/App';
-
-// Child routes
-import home from './home';
-import error from './error';
-
-export default {
-
-  path: '/',
-
-  children: [
-    home,
-    error,
-  ],
-
-  async action({ next, render, context }) {
-    const component = await next();
-    if (component === undefined) return component;
-    return render(
-      <App context={context}>{component}</App>
-    );
-  },
-
-};
+export default (
+  <Route path="\"component={MainContainer} >
+    <Route path="/" component={HomeSection}/>
+    <Route path="/search-results" component={SearchResultsSection}/>
+    <Route path="/content-sources" component={ContentSourcesSection}/>
+  </Route>
+)

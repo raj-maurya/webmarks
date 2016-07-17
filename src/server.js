@@ -12,14 +12,19 @@ import path from 'path';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import ReactDOM from 'react-dom/server';
-import { match } from 'universal-router';
-import PrettyError from 'pretty-error';
+
 import routes from './routes';
-import assets from './assets'; // eslint-disable-line import/no-unresolved
 import { port, auth, analytics } from './config';
 import configureStore from './store/configureStore';
 import { setRuntimeVariable } from './redux/actions/runtime';
+
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import { Provider } from 'react-redux'
+import { createMemoryHistory, match, RouterContext } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
+import PrettyError from 'pretty-error';
+import assets from './assets'; // eslint-disable-line import/no-unresolved
 
 const app = express();
 
@@ -41,50 +46,48 @@ app.use(bodyParser.json());
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
-app.get('*', async (req, res, next) => {
-  try {
-    let css = [];
-    let statusCode = 200;
-    const template = require('./views/index.jade'); // eslint-disable-line global-require
-    const data = {title: '', description: '', body: '', css: '', entry: assets.main.js};
+app.use((req, res, next) => {
+  const template = require('./views/index.jade'); // eslint-disable-line global-require
+  const memoryHistory = createMemoryHistory(req.url);
+  const store = configureStore(memoryHistory);
+  const history = syncHistoryWithStore(memoryHistory, store);
 
-    if (process.env.NODE_ENV === 'production') {
-      data.trackingId = analytics.google.trackingId;
+  // Send the rendered page back to the client
+  match({history, routes, location: req.url}, (error, redirectLocation, renderProps) => {
+    if (error) {
+      res.status(500).send(error.message);
+    } else if (redirectLocation) {
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search);
+    } else if (!renderProps) {
+      res.status(404).send('Not found');
+    } else {
+      getReduxPromise().then(() => {
+        res.status(200);
+        res.send(template({
+          body: renderToString(
+            <Provider store={store}>
+              <RouterContext {...renderProps}/>
+            </Provider>
+          ),
+          entry: assets.main.js,
+          children: ''
+        }));
+      }).catch((error) => {
+        console.error('Error', error);
+        res.send(error)
+      });
+
+      function getReduxPromise() {
+        let { query, params } = renderProps;
+        let component = renderProps.components[renderProps.components.length - 1].WrappedComponent;
+        let promise = (component && component.fetchData)
+          ? component.fetchData({query, params, history, store})
+          : Promise.resolve();
+
+        return promise;
+      }
     }
-
-    const store = configureStore({}, {
-      cookie: req.headers.cookie,
-    });
-
-    store.dispatch(setRuntimeVariable({
-      name: 'initialNow',
-      value: Date.now(),
-    }));
-
-    await match(routes, {
-      path: req.path,
-      query: req.query,
-      context: {
-        store,
-        insertCss: styles => css.push(styles._getCss()), // eslint-disable-line no-underscore-dangle
-        setTitle: value => (data.title = value),
-        setMeta: (key, value) => (data[key] = value),
-      },
-      render(component, status = 200) {
-        css = [];
-        statusCode = status;
-        data.state = JSON.stringify(store.getState());
-        data.body = ReactDOM.renderToString(component);
-        data.css = css.join('');
-        return true;
-      },
-    });
-
-    res.status(statusCode);
-    res.send(template(data));
-  } catch (err) {
-    next(err);
-  }
+  })
 });
 
 //
