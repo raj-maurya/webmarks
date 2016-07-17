@@ -1,0 +1,16 @@
+.search-bar {
+  @extend .input-group;
+  margin-bottom: 0;
+
+  &__input {
+    @extend .input-group-field;
+  }
+
+  .search-button-container {
+    @extend .input-group-button;
+
+    &__button {
+      @include button();
+    }
+  }
+}

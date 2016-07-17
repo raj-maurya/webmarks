@@ -1,4 +1,5 @@
 import React from 'react';
+import SearchBar  from '../../../components/search-bar';
 
 export default class HomeSection extends React.Component {
 
@@ -15,13 +16,7 @@ export default class HomeSection extends React.Component {
             </div>
             <div className="home-search__search-container">
               <div className="home-search__search-input">
-                <div className="input-group">
-                  <input className="input-group-field" type="text"/>
-
-                  <div className="input-group-button">
-                    <input type="submit" className="button" value="Search"/>
-                  </div>
-                </div>
+                <SearchBar/>
               </div>
             </div>
           </div>

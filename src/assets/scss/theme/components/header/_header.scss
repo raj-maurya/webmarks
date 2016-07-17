@@ -1,6 +1,5 @@
 .top-bar {
   @include top-bar-container;
-  z-index: 1;
 
   &__logo {
     @include top-bar-stacked;

@@ -1,0 +1,18 @@
+.search-item {
+  margin: rem-calc(30px) rem-calc(10px);
+  max-width: 80%;
+
+  &__title {
+    font-size: rem-calc(24px);
+    color: $default-black;
+  }
+
+  &__url {
+    font-size: rem-calc(16px);
+    color: $default-blue;
+  }
+
+  &__description {
+    font-size: rem-calc(18px);
+  }
+}
