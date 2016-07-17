@@ -1,10 +1,42 @@
 .home-section {
-
-  &__banner {
-
-  }
+  @include flex-grid-row();
+  position: fixed;
+  height: 100%;
+  top: 53px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  background: $default-blue;
+  max-width: 100%;
+  color: $default-white;
 
   &__search {
+    @include flex-grid-column(10);
+    @include flex-grid-column-align(middle);
+    margin: 0 auto;
+    width: 70%;
+    height: 40%;
+
+    .home-search {
+      &__title {
+        text-align: center;
+        font-size: 48px;
+        font-weight: 800;
+      }
+
+      &__description {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 400;
+        padding-bottom: 10px;
+      }
+
+      &__search-container {
+        width: 80%;
+        margin: 0 auto;
+      }
+    }
 
   }
 }

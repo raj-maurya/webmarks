@@ -13,15 +13,15 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import App from './App';
+import App from './Root';
 
-describe('App', () => {
+describe('Root', () => {
 
   it('renders children correctly', () => {
     const wrapper = shallow(
-      <App context={{ insertCss: () => {} }}>
+      <Root context={{ insertCss: () => {} }}>
         <div className="child" />
-      </App>
+      </Root>
     );
 
     expect(wrapper.contains(<div className="child" />)).to.be.true;
