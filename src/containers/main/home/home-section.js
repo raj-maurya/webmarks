@@ -3,6 +3,11 @@ import SearchBar  from '../../../components/search-bar';
 
 export default class HomeSection extends React.Component {
 
+  onSearchQuery(query) {
+    const {history} = this.props;
+    history.push('/search-results', {query: query});
+  }
+
   render() {
     return (
       <div className="home-section">
@@ -16,7 +21,7 @@ export default class HomeSection extends React.Component {
             </div>
             <div className="home-search__search-container">
               <div className="home-search__search-input">
-                <SearchBar/>
+                <SearchBar onSearch={this.onSearchQuery.bind(this)}/>
               </div>
             </div>
           </div>
