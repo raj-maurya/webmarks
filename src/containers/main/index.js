@@ -10,8 +10,11 @@ class MainScreen extends React.Component {
   render() {
     return (
       <div className="main-screen">
-        <Header/>
-        { this.props.children }
+        <div id="container" className="container">
+          <div id="output" className="container">
+            { this.props.children }
+          </div>
+        </div>
       </div>
     );
   }

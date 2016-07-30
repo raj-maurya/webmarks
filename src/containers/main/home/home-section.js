@@ -17,28 +17,30 @@ class HomeSection extends React.Component {
   onSearchQuery(query) {
     const {dispatch, history} = this.props;
     dispatch(querySearch(query));
-    history.push('/search-results', {query: query});
+    history.push(`/search-results?q=${query}`);
   }
 
   render() {
     return (
-      <div className="home-section">
-        <div className="home-section__search">
-          <div className="home-search">
-            <div className="home-search__title">
-              Worldbrain
-            </div>
-            <div className="home-search__description">
-              Make information more trust
-            </div>
-            <div className="home-search__search-container">
-              <div className="home-search__search-input">
-                <SearchBar onSearch={this.onSearchQuery.bind(this)}/>
+
+          <div className="home-section container">
+            <div className="home-section__search">
+              <div className="home-search">
+                <div className="home-search__title">
+                  Worldbrain
+                </div>
+                <div className="home-search__description">
+                  Make information more trust
+                </div>
+                <div className="home-search__search-container">
+                  <div className="home-search__search-input">
+                    <SearchBar onSearch={this.onSearchQuery.bind(this)}/>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+
     );
   }
 }

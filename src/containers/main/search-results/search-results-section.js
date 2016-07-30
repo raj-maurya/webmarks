@@ -19,8 +19,11 @@ class SearchResultsSection extends React.Component {
     searchResults: React.PropTypes.object.isRequired
   };
 
-  componentWillMount(){
-    const {params, history} = this.props;
+  componentWillMount() {
+    const {dispatch, location} = this.props;
+    if (location && location.query && location.query.q) {
+      dispatch(querySearch(location.query.q));
+    }
   }
 
   onSearchQuery(query) {
@@ -28,16 +31,26 @@ class SearchResultsSection extends React.Component {
     dispatch(querySearch(query));
   }
 
+  renderSearchResults(results = []) {
+    return results.map((item)=> {
+      return <SearchResultItem {...item}/>
+    });
+  }
 
+  onLogoClick() {
+    const {history} = this.props;
+    history.push('/');
+  }
 
   render() {
-    const query = this.props.params.q || '';
+    const {location, searchResults} = this.props;
+    const query = location && location.query && location.query.q || '';
 
     return (
       <div className="search-results">
         <div className="search-results__top">
           <div className="search-logo">
-            <img src={logo} className="search-logo__img" alt="webmarks"/>
+            <img src={logo} onClick={this.onLogoClick.bind(this)} className="search-logo__img" alt="webmarks"/>
           </div>
           <div className="search-container">
             <div className="search-bar">
@@ -50,12 +63,12 @@ class SearchResultsSection extends React.Component {
             </div>
           </div>
         </div>
-        <div className="search-results__list">
-          <SearchResultItem />
-          <SearchResultItem />
-          <SearchResultItem />
-          <SearchResultItem />
-        </div>
+        {searchResults.meta.isLoading ? <div className="search-results__loading">Loading ...</div> : ''}
+        {searchResults.error.isError ? <div className="search-results__error">Error {searchResults.error}</div> : ''}
+        {!(searchResults.error.isError && searchResults.meta.isLoading) ?
+          <div className="search-results__list">
+            {this.renderSearchResults(searchResults.result)}
+          </div> : ''}
       </div>
     );
   }

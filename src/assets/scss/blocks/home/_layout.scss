@@ -2,12 +2,11 @@
   @include flex-grid-row();
   position: fixed;
   height: 100%;
-  top: rem-calc(53px);
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 0;
-  background: $default-blue;
   max-width: 100%;
   color: $default-white;
 
@@ -38,5 +37,18 @@
       }
     }
 
+  }
+}
+
+.container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  max-width: 100%;
+  canvas{
+    transform: translateZ(0);
   }
 }

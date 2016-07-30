@@ -2,7 +2,7 @@ import { createReducer } from '../../../utils';
 import { SEARCH_QUERY,SEARCH_QUERY_SUCCESS,SEARCH_QUERY_FAILURE } from '../../actions/search';
 
 const initSearchResultState = {
-  result: {},
+  result: [],
   data: {},
   meta: {
     isLoading: false
@@ -24,9 +24,7 @@ export default createReducer(initSearchResultState, {
     }),
   [SEARCH_QUERY_SUCCESS]: (state, {json}) =>
     Object.assign({}, state, {
-      result: {
-        json
-      },
+      result: json,
       isError: false,
       meta: {
         isLoading: false

@@ -11,6 +11,8 @@ import path from 'path';
 import webpack from 'webpack';
 import extend from 'extend';
 import AssetsPlugin from 'assets-webpack-plugin';
+import ExtractTextPlugin from "extract-text-webpack-plugin";
+let extractCSS = new ExtractTextPlugin('[name].[hash].css');
 
 const DEBUG = !process.argv.includes('--release');
 const VERBOSE = process.argv.includes('--verbose');
@@ -74,27 +76,10 @@ const config = {
         },
       },
       {
-        test: /\.css/,
-        loaders: [
-          'style-loader',
-          `css-loader?${JSON.stringify({
-            sourceMap: DEBUG,
-            // CSS Modules https://github.com/css-modules/css-modules
-            modules: true,
-            localIdentName: DEBUG ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
-            // CSS Nano http://cssnano.co/options/
-            minimize: !DEBUG,
-          })}`,
-          'postcss-loader?pack=default',
-        ],
-      },
-      {
         test: /\.scss$/,
-        loaders: [
-          'style-loader',
-          `css-loader?${JSON.stringify({ sourceMap: DEBUG, minimize: !DEBUG })}`,
-          'sass-loader',
-        ],
+        loader: DEBUG ?
+          `style!css-loader?${JSON.stringify({sourceMap: DEBUG, minimize: !DEBUG})}!sass` :
+          extractCSS.extract([`css?${JSON.stringify({sourceMap: DEBUG, minimize: !DEBUG})}`, `sass`])
       },
       {
         test: /\.json$/,
@@ -215,6 +200,7 @@ const clientConfig = extend(true, {}, config, {
 
   plugins: [
 
+    extractCSS,
     // Define free variables
     // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
     new webpack.DefinePlugin({ ...GLOBALS, 'process.env.BROWSER': true }),

@@ -5,6 +5,18 @@
   &__title {
     font-size: rem-calc(24px);
     color: $default-black;
+
+    & > a {
+      color: $default-black;
+
+      &:hover {
+        color: $default-blue;
+      }
+
+      &:focus {
+        color: $default-blue;
+      }
+    }
   }
 
   &__url {

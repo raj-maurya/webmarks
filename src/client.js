@@ -22,6 +22,9 @@ import { syncHistoryWithStore } from 'react-router-redux'
 const store = configureStore(browserHistory, window.__initialState__);
 const history = syncHistoryWithStore(browserHistory, store);
 require('./assets/scss/app.scss');
+setTimeout(()=>{
+  require('utils/triangles');
+},0);
 
 // Restore the scroll position if it was saved into the state
 function restoreScrollPosition(state) {
@@ -72,8 +75,6 @@ function run() {
       getElementById('source').
       getAttribute('data-initial-state')
   );
-
-  console.log('Error, AAA');
 
   render(container,{}, <Provider store={store}>
     <Router history={history} routes={routes}/>

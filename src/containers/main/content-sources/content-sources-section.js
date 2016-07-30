@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class ContentSourcesSection extends React.Component {
+class ContentSourcesSection extends React.Component {
 
   render () {
     return (
@@ -11,3 +11,4 @@ export default class ContentSourcesSection extends React.Component {
   }
 }
 
+export default ContentSourcesSection;

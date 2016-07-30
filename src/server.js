@@ -89,6 +89,7 @@ app.use((req, res, next) => {
             </Provider>
           ),
           entry: assets.main.js,
+          cssEntry: assets.main.css,
           children: ''
         }));
       }).catch((error) => {
