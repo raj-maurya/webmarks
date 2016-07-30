@@ -1,7 +1,24 @@
 import React from 'react';
 import SearchBar  from '../../../components/search-bar';
+import {querySearch} from '../../../redux/actions/search';
+import { connect } from 'react-redux';
 
-export default class HomeSection extends React.Component {
+const mapStateToProps = (state) => ({
+  searchResults: state.searchResults
+});
+
+class HomeSection extends React.Component {
+
+  static propTypes = {
+    dispatch: React.PropTypes.func.isRequired,
+    searchResults: React.PropTypes.object.isRequired
+  };
+
+  onSearchQuery(query) {
+    const {dispatch, history} = this.props;
+    dispatch(querySearch(query));
+    history.push('/search-results', {query: query});
+  }
 
   render() {
     return (
@@ -16,7 +33,7 @@ export default class HomeSection extends React.Component {
             </div>
             <div className="home-search__search-container">
               <div className="home-search__search-input">
-                <SearchBar/>
+                <SearchBar onSearch={this.onSearchQuery.bind(this)}/>
               </div>
             </div>
           </div>
@@ -25,3 +42,4 @@ export default class HomeSection extends React.Component {
     );
   }
 }
+export default connect(mapStateToProps)(HomeSection);
