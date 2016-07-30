@@ -1,12 +1,3 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import 'babel-polyfill';
 import path from 'path';
 import express from 'express';
@@ -43,13 +34,41 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+app.get('/api/search-results', function (req, res) {
+  const defaultResults = [
+    {
+      title: '"Generation 25": Gelebte Einheit - Gelernte Grenzen',
+      url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
+    },
+    {
+      title: 'Another result',
+      url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
+    },
+    {
+      title: 'Thirld result',
+      url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
+    },
+    {
+      title: '"Generation 25": Gelebte Einheit - Gelernte Grenzen',
+      url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
+    }
+  ];
+
+  res.send(defaultResults);
+});
+
+
 //
 // Register server-side rendering middleware
 // -----------------------------------------------------------------------------
 app.use((req, res, next) => {
   const template = require('./views/index.jade'); // eslint-disable-line global-require
   const memoryHistory = createMemoryHistory(req.url);
-  const store = configureStore(memoryHistory);
+  const store = configureStore(memoryHistory, {});
   const history = syncHistoryWithStore(memoryHistory, store);
 
   // Send the rendered page back to the client

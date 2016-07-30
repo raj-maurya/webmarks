@@ -1,11 +1,15 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import apiMiddleware from '../redux/middleware/api';
 import rootReducer from '../redux/reducers';
+import { routerMiddleware } from 'react-router-redux';
 
 
-export default function configureStore(initialState, helpersConfig) {
+export default function configureStore(history, initialState) {
   const middleware = [thunk];
-
+  const reduxRouterMiddleware = routerMiddleware(history);
+  middleware.push(reduxRouterMiddleware);
+  middleware.push(apiMiddleware);
   let enhancer;
 
   if (__DEV__) {
@@ -43,7 +47,7 @@ export default function configureStore(initialState, helpersConfig) {
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (__DEV__ && module.hot) {
     module.hot.accept('../redux/reducers', () =>
-      store.replaceReducer(require('../redux/reducers').default) // eslint-disable-line global-require
+        store.replaceReducer(require('../redux/reducers').default) // eslint-disable-line global-require
     );
   }
 

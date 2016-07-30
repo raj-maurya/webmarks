@@ -1,10 +1,22 @@
 import React from 'react';
 import SearchBar  from '../../../components/search-bar';
+import {querySearch} from '../../../redux/actions/search';
+import { connect } from 'react-redux';
 
-export default class HomeSection extends React.Component {
+const mapStateToProps = (state) => ({
+  searchResults: state.searchResults
+});
+
+class HomeSection extends React.Component {
+
+  static propTypes = {
+    dispatch: React.PropTypes.func.isRequired,
+    searchResults: React.PropTypes.object.isRequired
+  };
 
   onSearchQuery(query) {
-    const {history} = this.props;
+    const {dispatch, history} = this.props;
+    dispatch(querySearch(query));
     history.push('/search-results', {query: query});
   }
 
@@ -30,3 +42,4 @@ export default class HomeSection extends React.Component {
     );
   }
 }
+export default connect(mapStateToProps)(HomeSection);

@@ -1,4 +1,4 @@
-import fetch from 'fetch';
+import fetch from '../../../core/fetch';
 
 function callApi(endpoint, method = 'get', data = {}, config = {}) {
   let fetchConfig = {
