@@ -2,7 +2,7 @@ import { createReducer } from '../../../utils';
 import { SEARCH_QUERY,SEARCH_QUERY_SUCCESS,SEARCH_QUERY_FAILURE } from '../../actions/search';
 
 const initSearchResultState = {
-  result: {},
+  result: [...Array(100)],
   data: {},
   meta: {
     isLoading: false

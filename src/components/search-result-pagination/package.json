@@ -1,0 +1,6 @@
+{
+  "name": "search-result-pagination",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./search-result-pagination.js"
+}

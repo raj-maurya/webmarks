@@ -5,7 +5,7 @@ class SearchResultItem extends React.Component {
   static propTypes = {
     title: React.PropTypes.string.isRequired,
     url: React.PropTypes.string.isRequired,
-    description: React.PropTypes.string.isRequired
+    description: React.PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -15,7 +15,7 @@ class SearchResultItem extends React.Component {
   };
 
   render() {
-    const {title, url, description} = this.props;
+    const { title, url, description } = this.props;
 
     return (
       <div className="search-item">
