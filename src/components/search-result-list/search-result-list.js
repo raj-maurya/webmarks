@@ -33,6 +33,7 @@ function render(data) {
           pages={data.pages}
           page={data.actualPage}
           lastPage={data.lastPage}
+          paginate={data.paginate}
         />
       </div>
     </div>
@@ -40,17 +41,22 @@ function render(data) {
 }
 
 function SearchResultList(props) {
-  const results = props.results;
+  const results = props.results.json;
+
+  if (!Array.isArray(results)) {
+    return null;
+  }
+
+  const actualPage = Math.round(parseInt(props.page, 10));
   const resultsPerPage = 5;
-  const pagesPerPage = 10;
-  const pagesQty = results.length / resultsPerPage;
+  const pagesQty = Math.round(results.length / resultsPerPage);
+  const pagesPerPage = pagesQty > 10 ? 10 : pagesQty;
   const lastPage = pagesQty;
 
-  if (props.page < 1 || props.page > lastPage) {
+  if (actualPage < 1 || actualPage > lastPage) {
     props.paginate();
   }
 
-  const actualPage = props.page < 1 ? 1 : props.page;
   const start = actualPage === 1 ? 0 : resultsPerPage * (actualPage - 1);
   const end = start + resultsPerPage;
   const pageResults = results.slice(start, end);
@@ -70,12 +76,12 @@ function SearchResultList(props) {
   });
 
   let actualPages;
-  if ((lastPage - actualPage) < (pagesPerPage / 2)) {
+  if ((lastPage - actualPage) < Math.round(pagesPerPage / 2)) {
     const actualFirstPage = lastPage - pagesPerPage;
     actualPages = pages.slice(actualFirstPage, lastPage);
-  } else if (actualPage > ((pagesPerPage / 2) + 1)) {
-    const actualFirstPage = actualPage - (pagesPerPage / 2);
-    const actualLastPage = actualPage + (pagesPerPage / 2);
+  } else if (actualPage > (Math.round(pagesPerPage / 2) + 1)) {
+    const actualFirstPage = actualPage - Math.round(pagesPerPage / 2);
+    const actualLastPage = actualPage + Math.round(pagesPerPage / 2);
     actualPages = pages.slice(actualFirstPage, actualLastPage);
   } else {
     const actualFirstPage = 0;
@@ -86,6 +92,7 @@ function SearchResultList(props) {
   const data = {
     results: pageResults,
     pages: actualPages,
+    paginate: props.paginate,
     actualPage,
     lastPage,
   };
@@ -95,7 +102,7 @@ function SearchResultList(props) {
 
 SearchResultList.propTypes = {
   page: PropTypes.number.isRequired,
-  results: PropTypes.array.isRequired,
+  results: PropTypes.object.isRequired,
   paginate: PropTypes.func.isRequired,
 };
 

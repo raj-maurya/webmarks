@@ -59,10 +59,7 @@ class SearchResultsSection extends Component {
           </div>
           <div className="search-container">
             <div className="search-bar">
-              <SearchBar
-                value={query}
-                onSearch={() => { this.onSearchQuery(); }}
-              />
+              <SearchBar value={query} onSearch={() => { this.onSearchQuery(); }} />
             </div>
             <div className="search-menu">
               <li className="search-menu__item"><a href="#">All</a></li>
@@ -72,11 +69,11 @@ class SearchResultsSection extends Component {
           </div>
         </div>
         <div className="search-results__list">
-          <SearchResultList
+          {!this.props.searchResults.meta.isLoading ? <SearchResultList
             results={this.props.searchResults.result}
             page={parseInt(this.props.params.page, 10)}
             paginate={(page) => { this.onPaginate(page); }}
-          />
+          /> : null}
         </div>
       </div>
     );
