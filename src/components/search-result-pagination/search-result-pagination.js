@@ -1,21 +1,19 @@
 import React from 'react';
 
 function pages(data, paginate) {
-  return data.map((page, i) => {
-    return (
-      <li className="search-pagination-page" key={i}>
-        <a
-          href="#"
-          className="search-pagination-page__link"
-          disabled={page.disable}
-          onClick={(e) => {
-            e.preventDefault();
-            paginate(page.page);
-          }}
-        >{page.page}</a>
-      </li>
-    );
-  });
+  return data.map((page, i) => (
+    <li className="search-pagination-page" key={i}>
+      <a
+        href="#"
+        className="search-pagination-page__link"
+        disabled={page.disable}
+        onClick={(e) => {
+          e.preventDefault();
+          paginate(page.page);
+        }}
+      >{page.page}</a>
+    </li>
+  ));
 }
 
 function prev(actualPage, paginate) {
