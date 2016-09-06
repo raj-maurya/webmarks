@@ -29,7 +29,7 @@ class HomeSection extends React.Component {
               Worldbrain
             </div>
             <div className="home-search__description">
-              Make information more trust
+              The search engine with sources that are trusted by science community.
             </div>
             <div className="home-search__search-container">
               <div className="home-search__search-input">
