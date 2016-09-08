@@ -1,19 +1,31 @@
 import React from 'react';
 
-function pages(data, paginate) {
-  return data.map((page, i) => (
-    <li className="search-pagination-page" key={i}>
+function pageLink(data, paginate) {
+  return (
+    <li className="search-pagination-page" key={`search-page${data.key}`}>
       <a
         href="#"
         className="search-pagination-page__link"
-        disabled={page.disable}
+        disabled={data.disabled}
         onClick={(e) => {
           e.preventDefault();
-          paginate(page.page);
+          data.paginate(data.page);
         }}
-      >{page.page}</a>
+      >{data.text}</a>
     </li>
-  ));
+  );
+}
+
+function pages(data, paginate) {
+  return data.map((page, i) => {
+    return pageLink({
+      page: page.page,
+      key: i,
+      text: page.page,
+      disabled: page.disabled,
+      paginate
+    });
+  });
 }
 
 function prev(actualPage, paginate) {
@@ -21,20 +33,13 @@ function prev(actualPage, paginate) {
     return null;
   }
 
-  const page = actualPage - 1;
-
-  return (
-    <li className="search-pagination-page">
-      <a
-        href="#"
-        className="search-paginatio-page__link"
-        onClick={(e) => {
-          e.preventDefault();
-          paginate(page);
-        }}
-      >Prev</a>
-    </li>
-  );
+  const text = 'Prev';
+  return pageLink({
+    page: actualPage - 1,
+    key: text,
+    text,
+    paginate
+  });
 }
 
 function next(actualPage, lastPage, paginate) {
@@ -42,20 +47,13 @@ function next(actualPage, lastPage, paginate) {
     return null;
   }
 
-  const page = actualPage + 1;
-
-  return (
-    <li className="search-pagination-page">
-      <a
-        href="#"
-        className="search-paginatio-page__link"
-        onClick={(e) => {
-          e.preventDefault();
-          paginate(page);
-        }}
-      >Next</a>
-    </li>
-  );
+  const text = 'Next';
+  return pageLink({
+    page: actualPage + 1,
+    key: text,
+    text,
+    paginate
+  });
 }
 
 function SearchResultPagination(props) {

@@ -16,7 +16,7 @@ function render(data) {
 
     return (
       <SearchResultItem
-        key={i}
+        key={`search-item${i}`}
         title={title}
         url={url}
         description={description}
@@ -47,41 +47,35 @@ function SearchResultList(props) {
     return null;
   }
 
-  const actualPage = Math.round(parseInt(props.page, 10));
+  const actualPage = Math.ceil(parseInt(props.page, 10));
   const resultsPerPage = 5;
-  const pagesQty = Math.round(results.length / resultsPerPage);
-  const pagesPerPage = pagesQty > 10 ? 10 : pagesQty;
+  const pagesQty = Math.ceil(results.length / resultsPerPage);
+  const pagesPerPage = Math.min(pagesQty, 10);
   const lastPage = pagesQty;
 
   if (actualPage < 1 || actualPage > lastPage) {
     props.paginate();
   }
 
-  const start = actualPage === 1 ? 0 : resultsPerPage * (actualPage - 1);
+  const start = resultsPerPage * (actualPage - 1);
   const end = start + resultsPerPage;
   const pageResults = results.slice(start, end);
 
   const pages = [...Array(pagesQty)].map((_, i) => {
     const pageNumber = i + 1;
-    let disable = false;
-
-    if (actualPage === pageNumber) {
-      disable = true;
-    }
-
     return {
       page: pageNumber,
-      disable,
+      disabled: actualPage === pageNumber
     };
   });
 
   let actualPages;
-  if ((lastPage - actualPage) < Math.round(pagesPerPage / 2)) {
+  if ((lastPage - actualPage) < Math.ceil(pagesPerPage / 2)) {
     const actualFirstPage = lastPage - pagesPerPage;
     actualPages = pages.slice(actualFirstPage, lastPage);
-  } else if (actualPage > (Math.round(pagesPerPage / 2) + 1)) {
-    const actualFirstPage = actualPage - Math.round(pagesPerPage / 2);
-    const actualLastPage = actualPage + Math.round(pagesPerPage / 2);
+  } else if (actualPage > (Math.ceil(pagesPerPage / 2) + 1)) {
+    const actualFirstPage = actualPage - Math.ceil(pagesPerPage / 2);
+    const actualLastPage = actualPage + Math.ceil(pagesPerPage / 2);
     actualPages = pages.slice(actualFirstPage, actualLastPage);
   } else {
     const actualFirstPage = 0;
