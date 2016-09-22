@@ -1,6 +1,6 @@
 ## WorldBrain's Webmarks web client
 
-You want to contribute to our front-end development? Introduce yourself in _Team Client_'s [Gitter chat](https://gitter.im/WorldBrain/TEAM_WorldBrain_client)
+You want to contribute to our front-end development? Say hello via our [Gitter chat](https://gitter.im/WorldBrain/contact_us)
 
 ### Technical Implementation:
 
