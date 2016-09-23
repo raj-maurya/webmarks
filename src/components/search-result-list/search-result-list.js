@@ -4,15 +4,7 @@ import SearchResultPagination from '../search-result-pagination';
 
 function render(data) {
   const list = data.results.filter((result) => !!result).map((result, i) => {
-    let title;
-    let url;
-    let description;
-
-    if (typeof result !== 'undefined') {
-      title = result.title;
-      url = result.url;
-      description = result.description;
-    }
+    const { title, url, description } = result;
 
     return (
       <SearchResultItem
