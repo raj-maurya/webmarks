@@ -50,6 +50,7 @@ class SearchResultsSection extends Component {
 
   render() {
     const query = this.props.params.q || '';
+    const results = this.props.searchResults.result.json || [];
 
     return (
       <div className="search-results">
@@ -70,7 +71,7 @@ class SearchResultsSection extends Component {
         </div>
         <div className="search-results__list">
           {!this.props.searchResults.meta.isLoading ? <SearchResultList
-            results={this.props.searchResults.result}
+            results={results}
             page={parseInt(this.props.params.page, 10)}
             paginate={(page) => { this.onPaginate(page); }}
           /> : null}

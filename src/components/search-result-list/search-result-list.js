@@ -3,7 +3,7 @@ import SearchResultItem from '../search-result-item';
 import SearchResultPagination from '../search-result-pagination';
 
 function render(data) {
-  const list = data.results.map((result, i) => {
+  const list = data.results.filter((result) => !!result).map((result, i) => {
     let title;
     let url;
     let description;
@@ -41,12 +41,7 @@ function render(data) {
 }
 
 function SearchResultList(props) {
-  const results = props.results.json;
-
-  if (!Array.isArray(results)) {
-    return null;
-  }
-
+  const { results } = props;
   const actualPage = Math.ceil(parseInt(props.page, 10));
   const resultsPerPage = 5;
   const pagesQty = Math.ceil(results.length / resultsPerPage);
@@ -96,7 +91,7 @@ function SearchResultList(props) {
 
 SearchResultList.propTypes = {
   page: PropTypes.number.isRequired,
-  results: PropTypes.object.isRequired,
+  results: PropTypes.array.isRequired,
   paginate: PropTypes.func.isRequired,
 };
 
