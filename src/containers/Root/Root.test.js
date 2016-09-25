@@ -13,18 +13,28 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import App from './Root';
+import Root from './Root';
 
 describe('Root', () => {
 
-  it('renders children correctly', () => {
+  it('renders children when error', () => {
+    const wrapper = shallow(
+      <Root context={{ insertCss: () => {} }} error>
+        <div className="child" />
+      </Root>
+    );
+
+    expect(wrapper.contains(<div className="child" />)).to.be.true;
+  });
+
+  it('renders no children when no error', () => {
     const wrapper = shallow(
       <Root context={{ insertCss: () => {} }}>
         <div className="child" />
       </Root>
     );
 
-    expect(wrapper.contains(<div className="child" />)).to.be.true;
+    expect(wrapper.contains(<div className="child" />)).to.be.false;
   });
 
 });

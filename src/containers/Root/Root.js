@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import s from './Root.css';
 import { Provider } from 'react-redux';
 import routes from '../../routes';
 

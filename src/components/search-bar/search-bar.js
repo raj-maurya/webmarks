@@ -15,7 +15,7 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    const {value}= this.props;
+    const { value } = this.props;
     return (
       <div className="search-bar">
         <input className="search-bar__input" type="text"/>

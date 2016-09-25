@@ -75,8 +75,8 @@ function run() {
 
   console.log('Error, AAA');
 
-  render(container,{}, <Provider store={store}>
-    <Router history={history} routes={routes}/>
+  render(container, {}, <Provider store={store}>
+    <Router history={history} routes={routes} onUpdate={() => window.scrollTo(0, 0)} />
   </Provider>);
 
   // Save the page scroll position into the current location's state
