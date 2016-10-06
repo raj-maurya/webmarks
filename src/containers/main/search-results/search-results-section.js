@@ -62,11 +62,6 @@ class SearchResultsSection extends Component {
             <div className="search-bar">
               <SearchBar value={query} onSearch={() => { this.onSearchQuery(); }} />
             </div>
-            <div className="search-menu">
-              <li className="search-menu__item"><a href="#">All</a></li>
-              <li className="search-menu__item"><a href="#">Websites</a></li>
-              <li className="search-menu__item"><a href="#">Facebook</a></li>
-            </div>
           </div>
         </div>
         <div className="search-results__list">
