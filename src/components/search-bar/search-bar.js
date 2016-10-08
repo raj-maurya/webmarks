@@ -7,7 +7,8 @@ class SearchBar extends React.Component {
     value: React.PropTypes.string
   };
 
-  handleClick() {
+  handleSubmit(event) {
+    event.preventDefault();
     const {onSearch} = this.props;
     if (this.searchInput !== null) {
       onSearch(this.searchInput.value);
@@ -17,14 +18,15 @@ class SearchBar extends React.Component {
   render() {
     const { value } = this.props;
     return (
-      <div className="search-bar">
-        <input className="search-bar__input" type="text"/>
-
-        <div className="search-button-container">
-          <input type="submit" ref={(ref) => this.searchInput = ref} value={value || ''} className="search-button-container__button"
-                 onClick={this.handleClick.bind(this)} value="Search"/>
+      <form onSubmit={this.handleSubmit.bind(this)}>
+        <div className="search-bar">
+          <input className="search-bar__input" type="text"
+            ref={(ref) => this.searchInput = ref}/>
+          <div className="search-button-container">
+            <input type="submit" className="search-button-container__button" value="Search"/>
+          </div>
         </div>
-      </div>
+      </form>
     )
   }
 }
