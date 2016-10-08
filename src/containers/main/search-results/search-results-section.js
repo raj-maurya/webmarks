@@ -60,7 +60,7 @@ class SearchResultsSection extends Component {
           </div>
           <div className="search-container">
             <div className="search-bar">
-              <SearchBar value={query} onSearch={() => { this.onSearchQuery(); }} />
+              <SearchBar value={query} onSearch={this.onSearchQuery.bind(this)} />
             </div>
           </div>
         </div>
