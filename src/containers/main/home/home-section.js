@@ -34,7 +34,7 @@ class HomeSection extends React.Component {
             </div>
             <div className="home-search__search-container">
               <div className="home-search__search-input">
-                <SearchBar onSearch={() => { this.onSearchQuery(); }} />
+                <SearchBar onSearch={this.onSearchQuery.bind(this)} />
               </div>
             </div>
           </div>

@@ -37,65 +37,65 @@ app.use(bodyParser.json());
 app.get('/api/search-results', function (req, res) {
   const defaultResults = [
     {
-      title: '"Generation 25": Gelebte Einheit - Gelernte Grenzen',
+      title: `1 something about ${req.query.q}`,
       url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
     },
     {
-      title: 'Another result',
+      title: '2 Another result',
       url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
     },
     {
-      title: 'Thirld result',
+      title: 'Third result',
       url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
     },
     {
-      title: '"Generation 25": Gelebte Einheit - Gelernte Grenzen',
+      title: '"Generation 4": Gelebte Einheit - Gelernte Grenzen',
       url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
     },
     {
-      title: '"Generation 25": Gelebte Einheit - Gelernte Grenzen',
+      title: '"Generation 5": Gelebte Einheit - Gelernte Grenzen',
       url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
     },
     {
-      title: 'Another result',
+      title: 'SIXTH result',
       url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
     },
     {
-      title: 'Thirld result',
+      title: '"Gener7": Gelebte Einheit - Gelernte Grenzen',
       url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
     },
     {
-      title: '"Generation 25": Gelebte Einheit - Gelernte Grenzen',
+      title: '"Generation 8": Gelebte Einheit - Gelernte Grenzen',
       url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
     },
     {
-      title: '"Generation 25": Gelebte Einheit - Gelernte Grenzen',
+      title: 'Another result - 9.',
       url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
     },
     {
-      title: 'Another result',
+      title: 'Tenthest result',
       url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
     },
     {
-      title: 'Thirld result',
+      title: '"Onety-one": Gelebte Einheit - Gelernte Grenzen',
       url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
     },
     {
-      title: '"Generation 25": Gelebte Einheit - Gelernte Grenzen',
+      title: 'Last result, 12',
       url: 'http://www.dw.com/de/s%C3%BCndenbock-der-eu-junckers-dilemma/a-19391383',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore etdolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat."
-    }
+    },
   ];
 
   res.send(defaultResults);
