@@ -18,7 +18,7 @@ join [#react-starter-kit](https://gitter.im/kriasoft/react-starter-kit) chat roo
 Make sure that you have `node` (version 5+) installed on your machine. If it's the case, check out the project and install dependencies:
  
 ```
- git clone git@github.com:WorldBrain/client.git client
+ git clone git@github.com:WorldBrain/webmarks.git client
  npm install
 ``` 
  
