@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchBar from '../../../components/search-bar';
+import SearchSourcesSelector from '../../../components/search-sources-selector';
 import { querySearch } from '../../../redux/actions/search';
 import { connect } from 'react-redux';
 
@@ -36,6 +37,7 @@ class HomeSection extends React.Component {
               <div className="home-search__search-input">
                 <SearchBar onSearch={this.onSearchQuery.bind(this)} />
               </div>
+              <SearchSourcesSelector />
             </div>
           </div>
         </div>
