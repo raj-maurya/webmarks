@@ -77,12 +77,15 @@ class SearchSourcesSelector extends React.Component {
 
 		let selectedItems = selectedSources.map(source => _.find(allItems, {id: source.id}));
 
+		let placeholder = (selectedItems.length > 0) ? "Add a source..." : "Choose sources to search..."
+
 		return (
 			<div className="search-sources-selector">
 				<ReactSelector
 					universe={allItems}
 					selected={selectedItems}
 					compare={(a,b)=>0}
+					placeholder={placeholder}
 				/>
 			</div>
 		)

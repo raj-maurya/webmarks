@@ -1,58 +1,59 @@
 .search-sources-selector {
-	color: black;
-	background-color: white;
+    color: black;
+    background-color: white;
 
-	input {
-	    margin: 5px;
-	    margin-left: 0;
-	    outline: none;
-	    background-color: transparent;
-	    border: 2px solid transparent;
-	    padding: 5px;
-	}
-	
-	.item {
-	    display: block;
-	    padding: 5px;
-	}
+    @mixin selectedItem {
+        display: inline-block;
+        margin: 5px;
+        border: 2px solid #9ac;
+        border-radius: 5px;
+        background-color: #eff;
+    }
 
-	.selected {
-	    background-color: #9cf;
-	
+    input {
+        @include selectedItem;
+        outline: none;
+        padding: 5px;
+        padding-left: 10px;
+    }
 
-		.item {
-		    display: inline-block;
-		    margin: 5px;
-		    border: 2px solid #9ac;
-		    border-radius: 5px;
-		    background-color: #eff;
+    .item {
+        display: block;
+        padding: 5px;
+    }
 
-		    &:hover {
-		    	background-color: #fee;
-		    }
-		}
-	}
+    .selected {
+        background-color: #9cf;
 
-	.universe {
-		.item {
-			&.active {
-			    background-color: #adf;
-			}
+        .item {
+            @include selectedItem;
 
-			&:hover {
-		    	background-color: #eff;
-		    }
+            &:hover {
+                background-color: #fee;
+            }
+        }
+    }
 
-			&.active:hover {
-			    background-color: #bef;
-			}
+    .universe {
+        .item {
+            &.active {
+                background-color: #adf;
+            }
 
-		}
+            &:hover {
+                background-color: #eff;
+            }
 
-		.container {
-		    max-height: 200px;
-		    overflow-y: scroll;
-		}
-	}
+            &.active:hover {
+                background-color: #bef;
+            }
+
+        }
+
+        .container {
+            max-height: 200px;
+            overflow-y: scroll;
+        }
+    }
 
 }
