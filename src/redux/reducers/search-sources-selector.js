@@ -1,11 +1,13 @@
 import _ from 'lodash';
+import { persistentReducer } from 'redux-pouchdb';
+
 import { SEARCH_ADD_SOURCE, SEARCH_REMOVE_SOURCE } from '../actions/search-sources-selector';
 
 const initialState = {
 	selectedSources: [],
 };
 
-export default function searchSourcesSelector(state, action) {
+function searchSourcesSelector(state, action) {
 	if (state===undefined) {
 		state = initialState;
 	}
@@ -24,3 +26,5 @@ export default function searchSourcesSelector(state, action) {
 	}
 	return state;
 }
+
+export default persistentReducer(searchSourcesSelector);
