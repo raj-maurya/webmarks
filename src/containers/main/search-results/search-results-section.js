@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from '../../../components/search-bar';
+import SearchSourcesSelector from '../../../components/search-sources-selector';
 import SearchResultList from '../../../components/search-result-list';
 import { querySearch } from '../../../redux/actions/search';
 import { connect } from 'react-redux';
@@ -8,6 +9,7 @@ import logo from './logo-small.png';
 
 const mapStateToProps = (state) => ({
   searchResults: state.searchResults,
+  selectedSources: state.searchSourcesSelector.selectedSources,
 });
 
 class SearchResultsSection extends Component {
@@ -33,8 +35,8 @@ class SearchResultsSection extends Component {
   }
 
   onSearchQuery(query) {
-    const { dispatch } = this.props;
-    dispatch(querySearch({query}));
+    const { dispatch, selectedSources } = this.props;
+    dispatch(querySearch({query, selectedSources}));
   }
 
   onPaginate(_page) {
@@ -62,6 +64,7 @@ class SearchResultsSection extends Component {
             <div className="search-bar">
               <SearchBar value={query} onSearch={this.onSearchQuery.bind(this)} />
             </div>
+            <SearchSourcesSelector />
           </div>
         </div>
         <div className="search-results__list">
