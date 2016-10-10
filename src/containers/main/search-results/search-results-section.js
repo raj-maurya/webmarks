@@ -34,7 +34,7 @@ class SearchResultsSection extends Component {
 
   onSearchQuery(query) {
     const { dispatch } = this.props;
-    dispatch(querySearch(query));
+    dispatch(querySearch({query}));
   }
 
   onPaginate(_page) {
