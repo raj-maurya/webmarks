@@ -9,60 +9,20 @@ const mapStateToProps = state => state.searchSourcesSelector;
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
-// TODO: get this list from back-end
-const allSources = [
-	{
-		id: 0,
-		name: 'Trustable Stuff',
-	},
-	{
-		id: 1,
-		name: 'Science Unleashed',
-	},
-	{
-		id: 2,
-		name: 'We-Say-So',
-	},
-	{
-		id: 3,
-		name: 'Mom knows better',
-	},
-	{
-		id: 4,
-		name: 'Grandma knows even better still',
-	},
-	{
-		id: 5,
-		name: 'Factual reporting',
-	},
-	{
-		id: 6,
-		name: 'Intergalactic whispers',
-	},
-	{
-		id: 7,
-		name: 'Written with toes',
-	},
-	{
-		id: 8,
-		name: 'The pedantic paper',
-	},
-]
-
-
 class SearchSourcesSelector extends React.Component {
 
 	render() {
-		let { selectedSources, addSource, removeSource} = this.props;
-		let toggleSelected = (id) => {
-			if (selectedSources.find(source => (source.id===id))) {
-				removeSource(id)
-			}
-			else {
-				addSource(id)
-			}
-		}
+		let { allSources, selectedSources, addSource, removeSource} = this.props;
 
+		let placeholder = (selectedSources.length > 0) ? "Add a source..." : "Choose sources to search..."
+
+		// Reshape data for ReactSelector's interface
+		let toggleSelected = (id) => {
+			if (selectedSources.find(source => (source.id===id)))
+				removeSource(id);
+			else
+				addSource(id);
+		}
 		let allItems = allSources.map(source => ({
 			id: source.id,
 			renderer: props => <div>{props.name}</div>,
@@ -70,10 +30,7 @@ class SearchSourcesSelector extends React.Component {
 			name: source.name,
 			onToggle: toggleSelected,
 		}));
-
 		let selectedItems = selectedSources.map(s => allItems.find(item => s.id===item.id));
-
-		let placeholder = (selectedItems.length > 0) ? "Add a source..." : "Choose sources to search..."
 
 		return (
 			<div className="search-sources-selector">
