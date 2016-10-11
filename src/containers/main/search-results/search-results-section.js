@@ -9,7 +9,6 @@ import logo from './logo-small.png';
 
 const mapStateToProps = (state) => ({
   searchResults: state.searchResults,
-  selectedSources: state.searchSourcesSelector.selectedSources,
 });
 
 class SearchResultsSection extends Component {
@@ -35,8 +34,8 @@ class SearchResultsSection extends Component {
   }
 
   onSearchQuery(query) {
-    const { dispatch, selectedSources } = this.props;
-    dispatch(querySearch({query, selectedSources}));
+    const { dispatch } = this.props;
+    dispatch(querySearch({query}));
   }
 
   onPaginate(_page) {

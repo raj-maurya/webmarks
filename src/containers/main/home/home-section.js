@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
   searchResults: state.searchResults,
-  selectedSources: state.searchSourcesSelector.selectedSources,
 });
 
 class HomeSection extends React.Component {
@@ -18,8 +17,8 @@ class HomeSection extends React.Component {
   };
 
   onSearchQuery(query) {
-    const { dispatch, history, selectedSources } = this.props;
-    dispatch(querySearch({query, selectedSources}));
+    const { dispatch, history } = this.props;
+    dispatch(querySearch({query}));
     history.push('/search-results', { query });
   }
 
