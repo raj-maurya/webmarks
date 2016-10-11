@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from '../../../components/search-bar';
+import SearchSourcesSelector from '../../../components/search-sources-selector';
 import SearchResultList from '../../../components/search-result-list';
 import { querySearch } from '../../../redux/actions/search';
 import { connect } from 'react-redux';
@@ -34,7 +35,7 @@ class SearchResultsSection extends Component {
 
   onSearchQuery(query) {
     const { dispatch } = this.props;
-    dispatch(querySearch(query));
+    dispatch(querySearch({query}));
   }
 
   onPaginate(_page) {
@@ -62,6 +63,7 @@ class SearchResultsSection extends Component {
             <div className="search-bar">
               <SearchBar value={query} onSearch={this.onSearchQuery.bind(this)} />
             </div>
+            <SearchSourcesSelector />
           </div>
         </div>
         <div className="search-results__list">

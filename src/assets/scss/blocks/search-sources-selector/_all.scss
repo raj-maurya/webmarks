@@ -1,0 +1,59 @@
+.search-sources-selector {
+    color: black;
+    background-color: white;
+
+    @mixin selectedItem {
+        display: inline-block;
+        margin: 5px;
+        border: 2px solid #9ac;
+        border-radius: 5px;
+        background-color: #eff;
+    }
+
+    input {
+        @include selectedItem;
+        outline: none;
+        padding: 5px;
+        padding-left: 10px;
+    }
+
+    .item {
+        display: block;
+        padding: 5px;
+    }
+
+    .selected {
+        background-color: #9cf;
+
+        .item {
+            @include selectedItem;
+
+            &:hover {
+                background-color: #fee;
+            }
+        }
+    }
+
+    .universe {
+        .item {
+            &.active {
+                background-color: #adf;
+            }
+
+            &:hover {
+                background-color: #eff;
+            }
+
+            &.active:hover {
+                background-color: #bef;
+            }
+
+        }
+
+        .container {
+            max-height: 200px;
+            overflow-y: scroll;
+        }
+    }
+
+}

@@ -1,11 +1,15 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import PouchDB from 'pouchdb'
+import { persistentStore } from 'redux-pouchdb';
 import apiMiddleware from '../redux/middleware/api';
 import rootReducer from '../redux/reducers';
 import { routerMiddleware } from 'react-router-redux';
 
 
 export default function configureStore(history, initialState) {
+  const db = new PouchDB('reduxstore')
+
   const middleware = [thunk];
   const reduxRouterMiddleware = routerMiddleware(history);
   middleware.push(reduxRouterMiddleware);
@@ -33,12 +37,21 @@ export default function configureStore(history, initialState) {
       devToolsExtension = window.devToolsExtension();
     }
 
+    let addPersistentStore = f => f;
+    if (process.env.BROWSER) {
+      addPersistentStore = persistentStore(db)
+    }
+
     enhancer = compose(
       applyMiddleware(...middleware),
+      addPersistentStore,
       devToolsExtension,
     );
   } else {
-    enhancer = applyMiddleware(...middleware);
+    enhancer = compose(
+      applyMiddleware(...middleware),
+      addPersistentStore,
+    );
   }
 
   // See https://github.com/rackt/redux/releases/tag/v3.1.0
