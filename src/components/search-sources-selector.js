@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import React from 'react';
 import ReactSelector from 'react-selector';
 import { connect } from 'react-redux';
@@ -52,14 +51,11 @@ const allSources = [
 
 
 class SearchSourcesSelector extends React.Component {
-	constructor() {
-		super();
-	}
 
 	render() {
 		let { selectedSources, addSource, removeSource} = this.props;
 		let toggleSelected = (id) => {
-			if (_.find(selectedSources, {id})) {
+			if (selectedSources.find(source => (source.id===id))) {
 				removeSource(id)
 			}
 			else {
@@ -75,7 +71,7 @@ class SearchSourcesSelector extends React.Component {
 			onToggle: toggleSelected,
 		}));
 
-		let selectedItems = selectedSources.map(source => _.find(allItems, {id: source.id}));
+		let selectedItems = selectedSources.map(s => allItems.find(item => s.id===item.id));
 
 		let placeholder = (selectedItems.length > 0) ? "Add a source..." : "Choose sources to search..."
 
