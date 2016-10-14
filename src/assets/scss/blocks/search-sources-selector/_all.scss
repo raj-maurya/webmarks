@@ -27,9 +27,19 @@
 
         .item {
             @include selectedItem;
+            padding: 0;
 
-            &:hover {
-                background-color: #fee;
+            & .indexed, .unindexed {
+                padding: 5px;
+
+                &:hover {
+                    background-color: #FF4136;
+                    cursor: pointer;
+                }
+            }
+
+            & .unindexed {
+                background-color: #FF725C;
             }
         }
     }

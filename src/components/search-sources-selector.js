@@ -10,26 +10,38 @@ const mapStateToProps = state => state.searchSourcesSelector;
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 class SearchSourcesSelector extends React.Component {
+    constructor(props) {
+        super(props);
+        this.onItemNotInUniverse = this.onItemNotInUniverse.bind(this);
+    }
+
+    onItemNotInUniverse(source) {
+        if(source.length > 1) {
+            this.props.addSource(source);
+        }
+    }
 
 	render() {
-		let { allSources, selectedSources, addSource, removeSource} = this.props;
+		let { allSources, selectedSources, selectSource, unselectSource, addSource} = this.props;
 
 		let placeholder = (selectedSources.length > 0) ? "Add a source..." : "Choose sources to search..."
 
 		// Reshape data for ReactSelector's interface
 		let toggleSelected = (id) => {
 			if (selectedSources.find(source => (source.id===id)))
-				removeSource(id);
+				unselectSource(id);
 			else
-				addSource(id);
+				selectSource(id);
 		}
+        
 		let allItems = allSources.map(source => ({
 			id: source.id,
-			renderer: props => <div>{props.name}</div>,
-			props: {name: source.name},
+			renderer: props => <div className={props.isIndexed ? 'indexed' : 'unindexed'}>{props.name}</div>,
+            props: {name: source.name, isIndexed: source.indexed},
 			name: source.name,
 			onToggle: toggleSelected,
 		}));
+
 		let selectedItems = selectedSources.map(s => allItems.find(item => s.id===item.id));
 
 		return (
@@ -39,6 +51,7 @@ class SearchSourcesSelector extends React.Component {
 					selected={selectedItems}
 					compare={(a,b)=>0}
 					placeholder={placeholder}
+                    onItemNotInUniverse={this.onItemNotInUniverse}
 				/>
 			</div>
 		)
