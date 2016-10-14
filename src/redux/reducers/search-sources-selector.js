@@ -1,50 +1,51 @@
 import { persistentReducer } from 'redux-pouchdb';
+import uniqid from 'uniqid';
 
-import { SELECT_SOURCE, UNSELECT_SOURCE, ADD_SOURCE } from '../actions/search-sources-selector';
+import { SELECT_SOURCE, UNSELECT_SOURCE, ADD_SOURCE, REMOVE_SOURCE } from '../actions/search-sources-selector';
 
 const dummySources = [
 	{
-		id: 0,
+		id: uniqid(),
 		name: 'Trustable Stuff',
         indexed: true
 	},
 	{
-		id: 1,
+		id: uniqid(),
 		name: 'Science Unleashed',
         indexed: true
 	},
 	{
-		id: 2,
+		id: uniqid(),
 		name: 'We-Say-So',
         indexed: true
 	},
 	{
-		id: 3,
+		id: uniqid(),
 		name: 'Mom knows better',
         indexed: true
 	},
 	{
-		id: 4,
+		id: uniqid(),
 		name: 'Grandma knows even better still',
         indexed: true
 	},
 	{
-		id: 5,
+		id: uniqid(),
 		name: 'Factual reporting',
         indexed: true
 	},
 	{
-		id: 6,
+		id: uniqid(),
 		name: 'Intergalactic whispers',
         indexed: true
 	},
 	{
-		id: 7,
+		id: uniqid(),
 		name: 'Written with toes',
         indexed: true
 	},
 	{
-		id: 8,
+		id: uniqid(),
 		name: 'The pedantic paper',
         indexed: true
 	},
@@ -56,21 +57,23 @@ const initialState = {
 };
 
 function searchSourcesSelector(state = initialState, action) {
-	if (action.type===SELECT_SOURCE) {
+	if (action.type === SELECT_SOURCE) {
 		state = {
 			...state,
-			selectedSources: Array.concat(state.selectedSources, {id: action.id}),
+			selectedSources: [...state.selectedSources, state.allSources.find(source => source.id === action.id)],
 		}
 	}
-	if (action.type===UNSELECT_SOURCE) {
+
+	if (action.type === UNSELECT_SOURCE) {
 		state = {
 			...state,
-			selectedSources: state.selectedSources.filter(s => s.id!==action.id)
+			selectedSources: state.selectedSources.filter(source => source.id !== action.id)
 		}
 	}
-    if (action.type===ADD_SOURCE) {
+
+    if (action.type === ADD_SOURCE) {
         const newSource = {
-            id: state.allSources.length,
+            id: uniqid(),
             name: action.sourceName,
             indexed: false
         };
@@ -80,6 +83,14 @@ function searchSourcesSelector(state = initialState, action) {
             selectedSources: [...state.selectedSources, newSource]
         }
     }
+
+    if(action.type === REMOVE_SOURCE) {
+        state = {
+            allSources: state.allSources.filter(source => source.id !== action.id),
+            selectedSources: state.selectedSources.filter(source => source.id !== action.id)
+        }
+    }
+
 	return state;
 }
 

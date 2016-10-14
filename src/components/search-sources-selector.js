@@ -13,36 +13,46 @@ class SearchSourcesSelector extends React.Component {
     constructor(props) {
         super(props);
         this.onItemNotInUniverse = this.onItemNotInUniverse.bind(this);
+        this.toggleSelectedItem = this.toggleSelectedItem.bind(this);
     }
 
-    onItemNotInUniverse(source) {
-        if(source.length > 1) {
-            this.props.addSource(source);
+    onItemNotInUniverse(sourceName) {
+        if(sourceName.length > 1) {
+            this.props.addSource(sourceName);
+        }
+    }
+
+    toggleSelectedItem(id) {
+        let { allSources, selectedSources, unselectSource, removeSource, selectSource } = this.props;
+        let selectedSource = selectedSources.find(source => { return source.id === id; });
+
+        if(selectedSource) {
+            if(selectedSource.indexed) {
+                unselectSource(id);
+                return;
+            }
+
+            removeSource(id);
+        } else {
+            selectSource(id);
         }
     }
 
 	render() {
-		let { allSources, selectedSources, selectSource, unselectSource, addSource} = this.props;
+		let { allSources, selectedSources, selectSource, unselectSource, addSource, removeSource} = this.props;
 
 		let placeholder = (selectedSources.length > 0) ? "Add a source..." : "Choose sources to search..."
 
 		// Reshape data for ReactSelector's interface
-		let toggleSelected = (id) => {
-			if (selectedSources.find(source => (source.id===id)))
-				unselectSource(id);
-			else
-				selectSource(id);
-		}
-        
 		let allItems = allSources.map(source => ({
 			id: source.id,
 			renderer: props => <div className={props.isIndexed ? 'indexed' : 'unindexed'}>{props.name}</div>,
             props: {name: source.name, isIndexed: source.indexed},
 			name: source.name,
-			onToggle: toggleSelected,
+			onToggle: this.toggleSelectedItem,
 		}));
 
-		let selectedItems = selectedSources.map(s => allItems.find(item => s.id===item.id));
+		const selectedItems = selectedSources.map(s => allItems.find(item => s.id===item.id));
 
 		return (
 			<div className="search-sources-selector">
