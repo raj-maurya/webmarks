@@ -13,6 +13,16 @@ const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 class SearchSourcesSelector extends React.Component {
     constructor(props) {
         super(props);
+
+        this.alertOptions = {
+            position: 'bottom-right',
+            effect: 'slide',
+            timeout: 5000,
+            html: true
+        };
+
+        this.domainRegex = /^[\w\-]+\.\w[\w\-\.]*((\/\w+)*|\/)$/i;
+
         this.onItemNotInUniverse = this.onItemNotInUniverse.bind(this);
         this.toggleSelectedItem = this.toggleSelectedItem.bind(this);
     }
@@ -22,12 +32,12 @@ class SearchSourcesSelector extends React.Component {
             return;
         }
 
-        Alert.warning(`Unfortunately, we haven't indexed <strong>${sourceName}</strong> yet. We'll be sure to get to it soon!`, {
-            position: 'bottom-right',
-            effect: 'slide',
-            timeout: 5000,
-            html: true
-        });
+        if(!this.domainRegex.test(sourceName)) {
+            Alert.error(`Sorry, <strong>${sourceName}</strong> doesn't look like a valid domain, please try again.`, this.alertOptions);
+            return;
+        }
+
+        Alert.warning(`Unfortunately, we haven't indexed <strong>${sourceName}</strong> yet. We'll be sure to get to it soon!`, this.alertOptions);
 
         this.props.addSource(sourceName);
     }
