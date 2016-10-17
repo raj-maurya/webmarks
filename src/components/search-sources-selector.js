@@ -36,15 +36,15 @@ class SearchSourcesSelector extends React.Component {
         let { allSources, selectedSources, unselectSource, removeSource, selectSource } = this.props;
         let selectedSource = selectedSources.find(source => { return source.id === id; });
 
-        if(selectedSource) {
-            if(selectedSource.indexed) {
-                unselectSource(id);
-                return;
-            }
-
-            removeSource(id);
-        } else {
+        if(!selectedSource) {
             selectSource(id);
+            return;
+        }
+
+        if(selectedSource.indexed) {
+            unselectSource(id);
+        } else {
+            removeSource(id);
         }
     }
 
