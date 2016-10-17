@@ -2,6 +2,7 @@ import React from 'react';
 import ReactSelector from 'react-selector';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Alert from 'react-s-alert';
 
 import * as actions from '../redux/actions/search-sources-selector'
 
@@ -17,9 +18,18 @@ class SearchSourcesSelector extends React.Component {
     }
 
     onItemNotInUniverse(sourceName) {
-        if(sourceName.length > 1) {
-            this.props.addSource(sourceName);
+        if(!sourceName.length) {
+            return;
         }
+
+        Alert.warning(`Unfortunately, we haven't indexed <strong>${sourceName}</strong> yet. We'll be sure to get to it soon!`, {
+            position: 'bottom-right',
+            effect: 'slide',
+            timeout: 5000,
+            html: true
+        });
+
+        this.props.addSource(sourceName);
     }
 
     toggleSelectedItem(id) {
