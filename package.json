@@ -41,7 +41,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.5.2",
     "react-router-redux": "^4.0.5",
-    "react-selector": "file:../react-selector", // TODO(AM): Revert before PR
+    "react-selector": "https://github.com/WorldBrain/react-selector#master",
     "redux": "^3.4.0",
     "redux-pouchdb": "^0.1.1",
     "redux-router": "^2.0.0",
