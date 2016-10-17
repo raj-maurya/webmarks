@@ -15,13 +15,17 @@ import routes from './routes';
 import FastClick from 'fastclick';
 import configureStore from './store/configureStore';
 import { addEventListener, removeEventListener } from './core/DOMUtils';
-import { Provider } from 'react-redux'
-import { Router, browserHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+
+// Styles
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/slide.css';
+import './assets/scss/app.scss';
 
 const store = configureStore(browserHistory, window.__initialState__);
 const history = syncHistoryWithStore(browserHistory, store);
-require('./assets/scss/app.scss');
 
 // Restore the scroll position if it was saved into the state
 function restoreScrollPosition(state) {
