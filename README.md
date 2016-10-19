@@ -5,7 +5,7 @@ You want to contribute to our front-end development? Say hello via our [Gitter c
 ### Technical Implementation:
 
 First version of the client is based in the [React Starter](https://github.com/kriasoft/react-starter-kit/tree/feature/redux) project. 
-Use use it as starting point for client development and later will come up with our own way of building front-end app.
+Use it as starting point for client development and later will come up with our own way of building front-end app.
    
 See [getting started](./docs/getting-started.md) &nbsp;|&nbsp;
 [docs](https://github.com/kriasoft/react-starter-kit/tree/master/docs) &nbsp;|&nbsp;
